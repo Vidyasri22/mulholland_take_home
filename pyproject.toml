@@ -9,6 +9,10 @@ dependencies = [
     "python-stdnum>=2.2",
     "us>=3.2.0",
     "py-moneyed>=3.0",
+    "anthropic>=0.105.2",
+    "pymupdf>=1.27.2.3",
+    "google-genai>=2.7.0",
+    "groq>=1.4.0",
 ]
 
 [tool.ruff]

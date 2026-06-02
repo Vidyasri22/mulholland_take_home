@@ -87,8 +87,9 @@ class ActualForm(str, Enum):
     RING = "ring"             # rings (finger)
     WAIST = "waist"           # belt, girdle, sash
     FEET = "feet"             # boots, shoes, slippers
-    # --- not worn ---
+    # --- wielded / held (off-hand counts as its own slot) ---
     WEAPON = "weapon"         # sword, axe, bow, etc. (wielded)
+    SHIELD = "shield"         # shield / buckler (off-hand)
     HELD = "held"             # wand, rod, staff, horn, instrument, orb
     POTION = "potion"         # drinkable / consumable
     SCROLL = "scroll"         # scroll, written
@@ -135,6 +136,8 @@ _FORM_ALIASES: dict[str, ActualForm] = {
     "boots": ActualForm.FEET, "shoes": ActualForm.FEET, "slippers": ActualForm.FEET,
     "sword": ActualForm.WEAPON, "axe": ActualForm.WEAPON, "bow": ActualForm.WEAPON,
     "dagger": ActualForm.WEAPON, "blade": ActualForm.WEAPON, "mace": ActualForm.WEAPON,
+    "spear": ActualForm.WEAPON, "hammer": ActualForm.WEAPON, "whip": ActualForm.WEAPON,
+    "shield": ActualForm.SHIELD, "buckler": ActualForm.SHIELD,
     "wand": ActualForm.HELD, "rod": ActualForm.HELD, "staff": ActualForm.HELD,
     "horn": ActualForm.HELD, "instrument": ActualForm.HELD, "orb": ActualForm.HELD,
     "potion": ActualForm.POTION, "oil": ActualForm.POTION, "elixir": ActualForm.POTION,
@@ -158,6 +161,16 @@ def _to_form(v) -> ActualForm:
         if word in _FORM_ALIASES:
             return _FORM_ALIASES[word]
     return ActualForm.UNKNOWN
+
+
+def infer_form(text) -> ActualForm:
+    """Public helper: best-guess form from any text (e.g. an item's name).
+
+    Used by the pipeline as a fallback when the model can't read the form
+    from the illustration — the name usually gives it away (a 'Mask of ...'
+    is worn on the head, a 'Shield of ...' is a shield).
+    """
+    return _to_form(text)
 
 
 # ---- Annotated field types (canonical form + Hint for the prompt) -----------

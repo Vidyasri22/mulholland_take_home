@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+.venv/
+uv.lock
+
+# Embedded Postgres data directory created by db.connect()
+data/.pg/
+
+*.egg-info/

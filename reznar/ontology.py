@@ -216,6 +216,30 @@ class MagicItem(BaseModel):
     # content
     description: str = Field(default="", description="the item's rules/flavor text")
 
+    # --- the patterns Reznar wants to find across the catalog ---
+    # (judged by the extraction model as it reads the item; these are the
+    #  four dimensions named in the README, used as features in Part 2)
+    is_offensive: bool = Field(
+        default=False,
+        description="true if the item improves the user's ability to harm or "
+                    "control others (damage, attacks, mind control, etc.)")
+    is_defensive: bool = Field(
+        default=False,
+        description="true if the item protects the user (AC, resistance, "
+                    "immunity, saving-throw bonuses, healing, etc.)")
+    target_creatures: list[str] = Field(
+        default_factory=list,
+        description="creature types the item is specifically aimed at, lowercase "
+                    "(e.g. ['fiend','dragon','undead']); empty list if none")
+    target_environments: list[str] = Field(
+        default_factory=list,
+        description="environments the item is tied to, lowercase "
+                    "(e.g. ['underwater','desert','forest']); empty list if none")
+    has_usage_limits: bool = Field(
+        default=False,
+        description="true if use is limited (charges, once per day, recharges at "
+                    "dawn, requires a saving throw, concentration, etc.)")
+
     # light provenance + db id
     source_page: Optional[int] = Field(
         default=None, description="1-based PDF page the item was extracted from")

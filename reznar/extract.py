@@ -64,6 +64,12 @@ _EXTRACTED_FIELDS = [
     "attunement_condition",
     "actual_form",
     "description",
+    # the four pattern dimensions Reznar cares about (README), judged by the model
+    "is_offensive",
+    "is_defensive",
+    "target_creatures",
+    "target_environments",
+    "has_usage_limits",
 ]
 
 

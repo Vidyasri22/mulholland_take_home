@@ -13,6 +13,12 @@ dependencies = [
     "pymupdf>=1.27.2.3",
     "google-genai>=2.7.0",
     "groq>=1.4.0",
+    "pandas>=3.0.3",
+    "scikit-learn>=1.9.0",
+    "matplotlib>=3.10.9",
+    "seaborn>=0.13.2",
+    "jupyter>=1.1.1",
+    "ipykernel>=7.2.0",
 ]
 
 [tool.ruff]
